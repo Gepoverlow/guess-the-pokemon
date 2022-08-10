@@ -1,0 +1,37 @@
+.main {
+  flex: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.pokemon-display {
+  position: relative;
+}
+
+.pokemon-display-bg {
+  height: 100%;
+  width: 100%;
+}
+
+.pokemon-image {
+  position: absolute;
+  left: 10%;
+  top: 25%;
+  width: 40%;
+  height: 40%;
+}
+
+.blackout {
+  filter: brightness(0);
+}
+
+.blackout:hover {
+  filter: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr;
+  }
+}

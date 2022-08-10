@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import "../styles/main.css";
 import Pokemon from "../classes/Pokemon";
+import PokemonDisplay from "./PokemonDisplay";
+import OptionsDisplay from "./OptionsDisplay";
 
-const Round = () => {
+const Main = () => {
   const [currentPokemon, setCurrentPokemon] = useState({});
   const [pokemonFrom, setPokemonFrom] = useState(1);
-  const [pokemonTo, setPokemonTo] = useState(5);
+  const [pokemonTo, setPokemonTo] = useState(151);
 
   useEffect(() => {
     fetchRandomPokemon(pokemonFrom, pokemonTo);
@@ -40,6 +43,7 @@ const Round = () => {
       randomPokemonNames.push(pokemon.name);
     }
     randomPokemonNames.push(name);
+    shuffleArray(randomPokemonNames);
 
     return randomPokemonNames;
   }
@@ -63,14 +67,24 @@ const Round = () => {
     return numbersArray;
   }
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  };
+
   const content = (
     <React.Fragment>
-      <div>
-        <button>Play Again</button>
-      </div>
+      <main className="main">
+        <PokemonDisplay source={currentPokemon.sprite} />
+        <OptionsDisplay />
+      </main>
     </React.Fragment>
   );
   return content;
 };
 
-export default Round;
+export default Main;
