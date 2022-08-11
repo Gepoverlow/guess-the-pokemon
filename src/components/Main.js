@@ -8,6 +8,7 @@ import ErrorMessage from "./ErrorMessage";
 
 const Main = () => {
   const [currentPokemon, setCurrentPokemon] = useState({});
+  const [round, setRound] = useState(0);
   const [pokemonFrom, setPokemonFrom] = useState(1);
   const [pokemonTo, setPokemonTo] = useState(151);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,11 +19,14 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
+    fetchRandomPokemon(pokemonFrom, pokemonTo);
+  }, [round]);
+
+  useEffect(() => {
     console.log(currentPokemon);
   }, [currentPokemon]);
 
   async function fetchRandomPokemon(from, to) {
-    console.log(checkForInconsistencies(from, to));
     if (checkForInconsistencies(from, to)) {
       try {
         const randomId = randomIntFromInterval(from, to);
@@ -89,7 +93,10 @@ const Main = () => {
   }
 
   const handleClick = (value) => {
-    console.log(value);
+    const currentRound = round;
+    const nextRound = currentRound + 1;
+    setRound(nextRound);
+    console.log(currentRound);
   };
 
   const checkForInconsistencies = (from, to) => {
