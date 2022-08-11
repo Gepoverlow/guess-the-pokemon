@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import Option from "./Option";
 
 const OptionsDisplay = (props) => {
-  const [names, setNames] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    setNames(props.arrayOfNames);
+    setPokemons(props.arrayOfNames);
   }, []);
 
   const content = (
     <React.Fragment>
-      <div className="optionsArray">
-        {names &&
-          names.map((name) => {
-            return <Option pokemonName={name} />;
+      <div className="options-display">
+        {pokemons &&
+          pokemons.map((pokemon) => {
+            return <Option key={pokemon.id} pokemonName={pokemon.name} />;
           })}
       </div>
     </React.Fragment>

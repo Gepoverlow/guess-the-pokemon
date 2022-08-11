@@ -22,7 +22,7 @@ const Main = () => {
     try {
       const randomId = Math.floor(Math.random() * to) + from;
       const pokemon = await fetchPokemon(randomId);
-      const pokemonNames = await fetchRandomPokemonNames(pokemon.name, pokemon.id, from, to);
+      const pokemonNames = await fetchRandomPokemonNames(pokemon, from, to);
       setCurrentPokemon(preparePokemonObject(pokemon, pokemonNames));
       setIsLoading(true);
     } catch (err) {
@@ -36,22 +36,22 @@ const Main = () => {
     return pokemon;
   }
 
-  async function fetchRandomPokemonNames(name, id, from, to) {
-    const randomPokemonIds = getArrayOfUniqueIds(from, to, id);
+  async function fetchRandomPokemonNames(pokemon, from, to) {
+    const randomPokemonIds = getArrayOfUniqueIds(from, to, pokemon.id);
     const randomPokemonNames = [];
 
     for (let i = 1; i < randomPokemonIds.length; i++) {
       const pokemon = await fetchPokemon(randomPokemonIds[i]);
-      randomPokemonNames.push(pokemon.name);
+      randomPokemonNames.push({ name: pokemon.name.toUpperCase(), id: pokemon.id });
     }
-    randomPokemonNames.push(name);
+    randomPokemonNames.push({ name: pokemon.name.toUpperCase(), id: pokemon.id });
     shuffleArray(randomPokemonNames);
 
     return randomPokemonNames;
   }
 
   function preparePokemonObject(rawPokemon, namesArray) {
-    return new Pokemon(rawPokemon.name, rawPokemon.sprites.other.home.front_default, namesArray);
+    return new Pokemon(rawPokemon, namesArray);
   }
 
   function getArrayOfUniqueIds(from, to, currentId) {

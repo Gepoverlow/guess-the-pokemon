@@ -3,7 +3,7 @@ import "../styles/main.css";
 
 const Option = (props) => {
   const content = (
-    <div>
+    <div className="option">
       <span>{props.pokemonName}</span>
     </div>
   );
