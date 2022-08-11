@@ -3,12 +3,15 @@ import "../styles/main.css";
 import Pokemon from "../classes/Pokemon";
 import PokemonDisplay from "./PokemonDisplay";
 import OptionsDisplay from "./OptionsDisplay";
+import Loading from "./Loading";
+import ErrorMessage from "./ErrorMessage";
 
 const Main = () => {
   const [currentPokemon, setCurrentPokemon] = useState({});
   const [pokemonFrom, setPokemonFrom] = useState(1);
   const [pokemonTo, setPokemonTo] = useState(151);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasInconsistencies, setHasInconsistencies] = useState(false);
 
   useEffect(() => {
     fetchRandomPokemon(pokemonFrom, pokemonTo);
@@ -19,14 +22,19 @@ const Main = () => {
   }, [currentPokemon]);
 
   async function fetchRandomPokemon(from, to) {
-    try {
-      const randomId = Math.floor(Math.random() * to) + from;
-      const pokemon = await fetchPokemon(randomId);
-      const pokemonNames = await fetchRandomPokemonNames(pokemon, from, to);
-      setCurrentPokemon(preparePokemonObject(pokemon, pokemonNames));
-      setIsLoading(true);
-    } catch (err) {
-      console.log(err);
+    console.log(checkForInconsistencies(from, to));
+    if (checkForInconsistencies(from, to)) {
+      try {
+        const randomId = randomIntFromInterval(from, to);
+        const pokemon = await fetchPokemon(randomId);
+        const pokemonNames = await fetchRandomPokemonNames(pokemon, from, to);
+        setCurrentPokemon(preparePokemonObject(pokemon, pokemonNames));
+        setIsLoading(true);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      setHasInconsistencies(true);
     }
   }
 
@@ -59,8 +67,7 @@ const Main = () => {
     numbersArray.push(currentId);
 
     do {
-      const randomNumber = Math.floor(Math.random() * to) + from;
-
+      const randomNumber = randomIntFromInterval(from, to);
       if (!numbersArray.includes(randomNumber)) {
         numbersArray.push(randomNumber);
       }
@@ -77,15 +84,28 @@ const Main = () => {
       array[j] = temp;
     }
   };
+  function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  const handleClick = (value) => {
+    console.log(value);
+  };
+
+  const checkForInconsistencies = (from, to) => {
+    return from + 5 < to && from > 0 && to <= 898;
+  };
 
   const content = (
     <main className="main">
-      {!isLoading ? (
-        <span>Loading Data</span>
+      {hasInconsistencies ? (
+        <ErrorMessage />
+      ) : !isLoading ? (
+        <Loading />
       ) : (
         <React.Fragment>
           <PokemonDisplay source={currentPokemon.sprite} />
-          <OptionsDisplay arrayOfNames={currentPokemon.randomNames} />
+          <OptionsDisplay arrayOfNames={currentPokemon.randomNames} onClick={handleClick} />
         </React.Fragment>
       )}
     </main>

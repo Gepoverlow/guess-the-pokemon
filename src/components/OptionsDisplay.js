@@ -13,7 +13,7 @@ const OptionsDisplay = (props) => {
       <div className="options-display">
         {pokemons &&
           pokemons.map((pokemon) => {
-            return <Option key={pokemon.id} pokemonName={pokemon.name} />;
+            return <Option key={pokemon.id} pokemonName={pokemon.name} pokemonId={pokemon.id} onClick={props.onClick} />;
           })}
       </div>
     </React.Fragment>
