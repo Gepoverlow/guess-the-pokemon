@@ -8,6 +8,7 @@ const Main = () => {
   const [currentPokemon, setCurrentPokemon] = useState({});
   const [pokemonFrom, setPokemonFrom] = useState(1);
   const [pokemonTo, setPokemonTo] = useState(151);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchRandomPokemon(pokemonFrom, pokemonTo);
@@ -23,6 +24,7 @@ const Main = () => {
       const pokemon = await fetchPokemon(randomId);
       const pokemonNames = await fetchRandomPokemonNames(pokemon.name, pokemon.id, from, to);
       setCurrentPokemon(preparePokemonObject(pokemon, pokemonNames));
+      setIsLoading(true);
     } catch (err) {
       console.log(err);
     }
@@ -77,12 +79,16 @@ const Main = () => {
   };
 
   const content = (
-    <React.Fragment>
-      <main className="main">
-        <PokemonDisplay source={currentPokemon.sprite} />
-        <OptionsDisplay />
-      </main>
-    </React.Fragment>
+    <main className="main">
+      {!isLoading ? (
+        <span>Loading Data</span>
+      ) : (
+        <React.Fragment>
+          <PokemonDisplay source={currentPokemon.sprite} />
+          <OptionsDisplay arrayOfNames={currentPokemon.randomNames} />
+        </React.Fragment>
+      )}
+    </main>
   );
   return content;
 };
