@@ -13,10 +13,13 @@ const Main = () => {
   const [pokemonTo, setPokemonTo] = useState(151);
   const [isLoading, setIsLoading] = useState(false);
   const [hasInconsistencies, setHasInconsistencies] = useState(false);
+  const [minIndex, setMinIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(898);
+  const [score, setScore] = useState(0);
 
-  useEffect(() => {
-    fetchRandomPokemon(pokemonFrom, pokemonTo);
-  }, []);
+  // useEffect(() => {
+  //   fetchRandomPokemon(pokemonFrom, pokemonTo);
+  // }, []);
 
   useEffect(() => {
     fetchRandomPokemon(pokemonFrom, pokemonTo);
@@ -30,19 +33,26 @@ const Main = () => {
     if (checkForInconsistencies(from, to)) {
       try {
         const randomId = randomIntFromInterval(from, to);
-        const pokemon = await fetchPokemon(randomId);
+        const pokemon = await fetchPokemonById(randomId);
         const pokemonNames = await fetchRandomPokemonNames(pokemon, from, to);
-        setCurrentPokemon(preparePokemonObject(pokemon, pokemonNames));
+        const preparedPokemon = preparePokemonObject(pokemon, pokemonNames);
+        setCurrentPokemon(preparedPokemon);
         setIsLoading(true);
+        if (!preparedPokemon.sprite) {
+          setHasInconsistencies(true);
+        } else {
+          setHasInconsistencies(false);
+        }
       } catch (err) {
-        console.log(err);
+        console.log(`There has been an error while trying to fetch a Pokemon: ${err}`);
+        setHasInconsistencies(true);
       }
     } else {
       setHasInconsistencies(true);
     }
   }
 
-  async function fetchPokemon(id) {
+  async function fetchPokemonById(id) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const pokemon = await response.json();
     return pokemon;
@@ -53,7 +63,7 @@ const Main = () => {
     const randomPokemonNames = [];
 
     for (let i = 1; i < randomPokemonIds.length; i++) {
-      const pokemon = await fetchPokemon(randomPokemonIds[i]);
+      const pokemon = await fetchPokemonById(randomPokemonIds[i]);
       randomPokemonNames.push({ name: pokemon.name.toUpperCase(), id: pokemon.id });
     }
     randomPokemonNames.push({ name: pokemon.name.toUpperCase(), id: pokemon.id });
@@ -93,6 +103,7 @@ const Main = () => {
   }
 
   const handleClick = (value) => {
+    checkSelection(value, currentPokemon.id);
     const currentRound = round;
     const nextRound = currentRound + 1;
     setRound(nextRound);
@@ -100,7 +111,15 @@ const Main = () => {
   };
 
   const checkForInconsistencies = (from, to) => {
-    return from + 5 < to && from > 0 && to <= 898;
+    return from + 5 < to && from > minIndex && to <= maxIndex;
+  };
+
+  const checkSelection = (clickedSelectionId, correctPokemonId) => {
+    if (clickedSelectionId === correctPokemonId) {
+      console.log("correct");
+    } else {
+      console.log("nopeeeee");
+    }
   };
 
   const content = (
