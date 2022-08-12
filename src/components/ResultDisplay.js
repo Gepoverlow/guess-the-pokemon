@@ -8,12 +8,15 @@ const ResultDisplay = (props) => {
         <SelectedMessage message={props.message} />
         {props.lives === 0 ? (
           <div>
-            {" "}
-            <span> You lost Buddy</span>
-            <button onClick={props.handleRestart}>Click to Restart!</button>
+            <span id="lost-msg"> You Lost :/ </span>
+            <span id="nextRound" onClick={props.handleRestart}>
+              Click to Restart!
+            </span>
           </div>
         ) : (
-          <button onClick={props.handleNextRound}>Next Round</button>
+          <span id="restart" onClick={props.handleNextRound}>
+            Click for next Round
+          </span>
         )}
       </div>
     </React.Fragment>

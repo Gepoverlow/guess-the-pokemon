@@ -8,6 +8,9 @@ html,
 body {
   height: 100%;
   min-height: 100%;
+  font-family: "Silkscreen", cursive;
+  background-color: rgb(68, 66, 66);
+  color: whitesmoke;
 }
 
 .App {

@@ -1,12 +1,11 @@
 .header {
   padding: 10px;
   text-align: center;
-  background: #1abc9c;
-  color: white;
+  background: #e2dfd8;
+  color: rgb(220, 59, 59);
   font-size: 30px;
   flex: none;
-}
-
-.header > span {
-  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

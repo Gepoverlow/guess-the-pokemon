@@ -5,7 +5,7 @@ const Footer = () => {
   const content = (
     <React.Fragment>
       <footer className="footer">
-        <span>Footer Here</span>
+        <span>Made with ♥ by Luk</span>
       </footer>
     </React.Fragment>
   );
