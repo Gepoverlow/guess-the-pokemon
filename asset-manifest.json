@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/guess-the-pokemon/static/css/main.2a8f0b01.css",
+    "main.js": "/guess-the-pokemon/static/js/main.089098d3.js",
+    "static/media/whose-that-pokemon.png": "/guess-the-pokemon/static/media/whose-that-pokemon.b715d1a8311b8accca76.png",
+    "index.html": "/guess-the-pokemon/index.html",
+    "main.2a8f0b01.css.map": "/guess-the-pokemon/static/css/main.2a8f0b01.css.map",
+    "main.089098d3.js.map": "/guess-the-pokemon/static/js/main.089098d3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a8f0b01.css",
+    "static/js/main.089098d3.js"
+  ]
+}
