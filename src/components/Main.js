@@ -112,8 +112,9 @@ const Main = () => {
 
   const handleNextRoundButton = () => {
     console.log("hi from parent");
-    fetchRandomPokemon(pokemonFrom, pokemonTo);
+    setIsLoading(false);
     setHasSelected(false);
+    fetchRandomPokemon(pokemonFrom, pokemonTo);
   };
 
   const checkForInconsistencies = (from, to) => {
