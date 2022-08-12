@@ -7,22 +7,18 @@ import ResultDisplay from "./ResultDisplay";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 
-const Main = () => {
+const Main = (props) => {
   const [currentPokemon, setCurrentPokemon] = useState({});
   const [round, setRound] = useState(0);
-  const [pokemonFrom, setPokemonFrom] = useState(600);
+  const [pokemonFrom, setPokemonFrom] = useState(1);
   const [pokemonTo, setPokemonTo] = useState(700);
   const [isLoading, setIsLoading] = useState(false);
   const [hasInconsistencies, setHasInconsistencies] = useState(false);
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(898);
   const [hasSelected, setHasSelected] = useState(false);
-  const [score, setScore] = useState(0);
   const [resultMessage, setResultMessage] = useState("");
-
-  // useEffect(() => {
-  //   fetchRandomPokemon(pokemonFrom, pokemonTo);
-  // }, []);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     fetchRandomPokemon(pokemonFrom, pokemonTo);
@@ -107,14 +103,12 @@ const Main = () => {
 
   const handleClick = (value) => {
     handleSelection(value, currentPokemon.id);
-    // handleNextRound();
   };
 
   const handleNextRoundButton = () => {
-    console.log("hi from parent");
     setIsLoading(false);
     setHasSelected(false);
-    fetchRandomPokemon(pokemonFrom, pokemonTo);
+    handleNextRound();
   };
 
   const checkForInconsistencies = (from, to) => {
@@ -124,9 +118,11 @@ const Main = () => {
   const handleSelection = (clickedSelectionId, correctPokemonId) => {
     setHasSelected(true);
     if (clickedSelectionId === correctPokemonId) {
-      setResultMessage(`Correct! The Pokemon was ${currentPokemon.name}`);
+      setResultMessage(`Correct! The Pokemon was ${currentPokemon.name}.`);
+      props.onAnswerGiven && props.onAnswerGiven(props.lives);
     } else {
-      setResultMessage(`Incorrect! The Pokemon was ${currentPokemon.name}`);
+      setResultMessage(`Incorrect! The Pokemon was ${currentPokemon.name}.`);
+      props.onAnswerGiven && props.onAnswerGiven(props.lives - 1);
     }
   };
 
@@ -134,7 +130,6 @@ const Main = () => {
     const currentRound = round;
     const nextRound = currentRound + 1;
     setRound(nextRound);
-    console.log(currentRound);
   };
 
   const content = (

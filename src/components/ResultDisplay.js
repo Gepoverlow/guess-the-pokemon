@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import SelectedMessage from "./SelectedMessage";
 
 const ResultDisplay = (props) => {
-  //   const handleRestart = () => {
-  //     console.log("hi");
-  //   };
   const content = (
     <React.Fragment>
       <div className="result-display">
