@@ -6,3 +6,7 @@
   font-size: 30px;
   flex: none;
 }
+
+.header > span {
+  margin-left: 10px;
+}

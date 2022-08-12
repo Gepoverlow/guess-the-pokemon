@@ -13,10 +13,14 @@ function App() {
     setLives(value);
   };
 
+  const handleScore = (value) => {
+    setScore(value);
+  };
+
   return (
     <div className="App">
-      <Header lives={lives} />
-      <Main onAnswerGiven={handleLives} score={score} lives={lives} />
+      <Header lives={lives} score={score} />
+      <Main handleScore={handleScore} handleLives={handleLives} score={score} lives={lives} />
       <Footer />
     </div>
   );

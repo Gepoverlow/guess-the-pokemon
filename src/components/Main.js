@@ -18,15 +18,10 @@ const Main = (props) => {
   const [maxIndex, setMaxIndex] = useState(898);
   const [hasSelected, setHasSelected] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     fetchRandomPokemon(pokemonFrom, pokemonTo);
   }, [round]);
-
-  useEffect(() => {
-    console.log(currentPokemon);
-  }, [currentPokemon]);
 
   async function fetchRandomPokemon(from, to) {
     if (checkForInconsistencies(from, to)) {
@@ -119,10 +114,11 @@ const Main = (props) => {
     setHasSelected(true);
     if (clickedSelectionId === correctPokemonId) {
       setResultMessage(`Correct! The Pokemon was ${currentPokemon.name}.`);
-      props.onAnswerGiven && props.onAnswerGiven(props.lives);
+      props.handleLives && props.handleLives(props.lives);
+      props.handleScore && props.handleScore(props.score + 50);
     } else {
       setResultMessage(`Incorrect! The Pokemon was ${currentPokemon.name}.`);
-      props.onAnswerGiven && props.onAnswerGiven(props.lives - 1);
+      props.handleLives && props.handleLives(props.lives - 1);
     }
   };
 
@@ -130,6 +126,13 @@ const Main = (props) => {
     const currentRound = round;
     const nextRound = currentRound + 1;
     setRound(nextRound);
+  };
+
+  const handleRestart = () => {
+    props.handleLives && props.handleLives(3);
+    props.handleScore && props.handleScore(0);
+    setRound(0);
+    setHasSelected(false);
   };
 
   const content = (
@@ -146,7 +149,7 @@ const Main = (props) => {
       ) : (
         <React.Fragment>
           <PokemonDisplay source={currentPokemon.sprite} hasSelected={hasSelected} />
-          <ResultDisplay message={resultMessage} handleNextRound={handleNextRoundButton} />
+          <ResultDisplay message={resultMessage} handleNextRound={handleNextRoundButton} handleRestart={handleRestart} lives={props.lives} />
         </React.Fragment>
       )}
     </main>

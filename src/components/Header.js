@@ -6,6 +6,7 @@ const Header = (props) => {
     <React.Fragment>
       <header className="header">
         <span>Lives Left: {props.lives}</span>
+        <span>Score: {props.score}</span>
       </header>
     </React.Fragment>
   );
