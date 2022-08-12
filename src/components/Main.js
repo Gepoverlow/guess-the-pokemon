@@ -3,14 +3,15 @@ import "../styles/main.css";
 import Pokemon from "../classes/Pokemon";
 import PokemonDisplay from "./PokemonDisplay";
 import OptionsDisplay from "./OptionsDisplay";
+import ResultDisplay from "./ResultDisplay";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 
 const Main = () => {
   const [currentPokemon, setCurrentPokemon] = useState({});
   const [round, setRound] = useState(0);
-  const [pokemonFrom, setPokemonFrom] = useState(1);
-  const [pokemonTo, setPokemonTo] = useState(151);
+  const [pokemonFrom, setPokemonFrom] = useState(600);
+  const [pokemonTo, setPokemonTo] = useState(700);
   const [isLoading, setIsLoading] = useState(false);
   const [hasInconsistencies, setHasInconsistencies] = useState(false);
   const [minIndex, setMinIndex] = useState(0);
@@ -109,6 +110,12 @@ const Main = () => {
     // handleNextRound();
   };
 
+  const handleNextRoundButton = () => {
+    console.log("hi from parent");
+    fetchRandomPokemon(pokemonFrom, pokemonTo);
+    setHasSelected(false);
+  };
+
   const checkForInconsistencies = (from, to) => {
     return from + 5 < to && from > minIndex && to <= maxIndex;
   };
@@ -135,10 +142,15 @@ const Main = () => {
         <ErrorMessage />
       ) : !isLoading ? (
         <Loading />
+      ) : !hasSelected ? (
+        <React.Fragment>
+          <PokemonDisplay source={currentPokemon.sprite} hasSelected={hasSelected} />
+          <OptionsDisplay arrayOfNames={currentPokemon.randomNames} onClick={handleClick} />
+        </React.Fragment>
       ) : (
         <React.Fragment>
           <PokemonDisplay source={currentPokemon.sprite} hasSelected={hasSelected} />
-          <OptionsDisplay arrayOfNames={currentPokemon.randomNames} onClick={handleClick} hasSelected={hasSelected} resultMessage={resultMessage} />
+          <ResultDisplay message={resultMessage} handleNextRound={handleNextRoundButton} />
         </React.Fragment>
       )}
     </main>
