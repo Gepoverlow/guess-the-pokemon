@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Guess the Pokemon!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Game screenshot](/src/assets/Screenshot%202022-08-12%20at%2016.09.53.png "Optional title")
 
-## Available Scripts
+We where given the assignment of making a quiz-like project with React and the freedom to consume whichever api we would like to get the data. The first that came to my mind was the pokeAPI, mainly becouse on how specific you can get with the data they provide!
 
-In the project directory, you can run:
+I instantly remember about the days I used to watch Pokemon and a "WHO IS THAT POKEMON" flashback visited my mind.
 
-### `npm start`
+I felt instantly inspiried to replicate this, and even though there are multiple things I would like to add, Im calling this project a success because:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## The takes:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Strengthened my component-based mentality using Reacts functional components.
+- Improved way of handling some new features (to me) like state-lifting.
+- Developed my probmem-solving skills.
 
-### `npm test`
+## What the game can do:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Player has a total of 3 lives. If your option is not correct you loose a life. At 0 it is game over and you are given the option to restart.
 
-### `npm run build`
+- Game keeps track of a score. If your option is succesfull, you get 50 points.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Every round a random Pokemon is fetched from the total pool of 898 Pokemons.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## What I would like to implement to the game still:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- A difficulty mode. The more difficult the game, the more options you have to pick between.
 
-### `npm run eject`
+- A pokemon sound option.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- A way to select which gen you want the pokemons to be fetched from, but the less pokemons the less the score it gives.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Conclusion
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Had a lot of fun working on this one, and sure learned a ton!
