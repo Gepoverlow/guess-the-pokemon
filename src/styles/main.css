@@ -41,9 +41,9 @@
   filter: brightness(0);
 }
 
-.blackout:hover {
+/* .blackout:hover {
   filter: none;
-}
+} */
 
 @media only screen and (max-width: 600px) {
   .main {

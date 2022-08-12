@@ -15,7 +15,9 @@ const Main = () => {
   const [hasInconsistencies, setHasInconsistencies] = useState(false);
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(898);
+  const [hasSelected, setHasSelected] = useState(false);
   const [score, setScore] = useState(0);
+  const [resultMessage, setResultMessage] = useState("");
 
   // useEffect(() => {
   //   fetchRandomPokemon(pokemonFrom, pokemonTo);
@@ -103,23 +105,28 @@ const Main = () => {
   }
 
   const handleClick = (value) => {
-    checkSelection(value, currentPokemon.id);
-    const currentRound = round;
-    const nextRound = currentRound + 1;
-    setRound(nextRound);
-    console.log(currentRound);
+    handleSelection(value, currentPokemon.id);
+    // handleNextRound();
   };
 
   const checkForInconsistencies = (from, to) => {
     return from + 5 < to && from > minIndex && to <= maxIndex;
   };
 
-  const checkSelection = (clickedSelectionId, correctPokemonId) => {
+  const handleSelection = (clickedSelectionId, correctPokemonId) => {
+    setHasSelected(true);
     if (clickedSelectionId === correctPokemonId) {
-      console.log("correct");
+      setResultMessage(`Correct! The Pokemon was ${currentPokemon.name}`);
     } else {
-      console.log("nopeeeee");
+      setResultMessage(`Incorrect! The Pokemon was ${currentPokemon.name}`);
     }
+  };
+
+  const handleNextRound = () => {
+    const currentRound = round;
+    const nextRound = currentRound + 1;
+    setRound(nextRound);
+    console.log(currentRound);
   };
 
   const content = (
@@ -130,8 +137,8 @@ const Main = () => {
         <Loading />
       ) : (
         <React.Fragment>
-          <PokemonDisplay source={currentPokemon.sprite} />
-          <OptionsDisplay arrayOfNames={currentPokemon.randomNames} onClick={handleClick} />
+          <PokemonDisplay source={currentPokemon.sprite} hasSelected={hasSelected} />
+          <OptionsDisplay arrayOfNames={currentPokemon.randomNames} onClick={handleClick} hasSelected={hasSelected} resultMessage={resultMessage} />
         </React.Fragment>
       )}
     </main>

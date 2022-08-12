@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const PokemonImage = (props) => {
+const HiddenPokemonImage = (props) => {
   const content = (
     <React.Fragment>
       <img className="pokemon-image blackout" src={props.source} />
@@ -9,4 +9,4 @@ const PokemonImage = (props) => {
   return content;
 };
 
-export default PokemonImage;
+export default HiddenPokemonImage;
