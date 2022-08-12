@@ -2,6 +2,8 @@
 
 ![Game screenshot](/src/assets/Screenshot%202022-08-12%20at%2016.09.53.png "Optional title")
 
+[Play the Game!](https://gepoverlow.github.io/guess-the-pokemon/)
+
 We where given the assignment of making a quiz-like project with React and the freedom to consume whichever api we would like to get the data. The first that came to my mind was the pokeAPI, mainly becouse on how specific you can get with the data they provide!
 
 I instantly remember about the days I used to watch Pokemon and a "WHO IS THAT POKEMON" flashback visited my mind.
